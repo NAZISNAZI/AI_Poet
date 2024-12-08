@@ -1,20 +1,17 @@
-from dotenv import load_dotenv
 import os
-from langchain_openai import ChatOpenAI
-import streamlit as st
+from dotenv import load_dotenv
 
 # .env 파일 로드
 load_dotenv()
 
-# OpenAI API 키 가져오기
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    raise ValueError("OPENAI_API_KEY가 설정되지 않았습니다.")
+api_key = os.environ.get("OPENAI_API_KEY")  # 'OPENAI_API_KEY' 환경 변수 가져오기
 
-# ChatOpenAI 초기화
-chat_model = ChatOpenAI(api_key=api_key)
+from langchain_openai import ChatOpenAI
+chat_model = ChatOpenAI()
 
-# Streamlit 앱 설정
+
+import streamlit as st
+
 st.title("인공지능 시인")
 subject = st.text_input("시의 주제를 입력해주세요.")
 st.write("시의 주제 : " + subject)
